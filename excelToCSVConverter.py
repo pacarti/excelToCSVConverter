@@ -8,9 +8,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # Skip non-xlsx files, load the workbook object.
 for file in os.listdir(os.getcwd()):
     if file.endswith('.xlsx'):
-        # print(file)
         wb = openpyxl.load_workbook(file)
-        # print(wb.sheetnames)
     else:
         continue
 
@@ -21,7 +19,6 @@ for file in os.listdir(os.getcwd()):
 
         # Create the CSV filename from the Excel filename and sheet title.
         pfile = Path(file)
-        # print(pfile.stem + '_' + sheetName + '.csv')
 
         csvFile = open(pfile.stem + '_' + sheetName + '.csv', 'w')
 
@@ -36,5 +33,5 @@ for file in os.listdir(os.getcwd()):
                 # Append each cell's data to rowData.
                 rowData.append(sheet[get_column_letter(colNum) + str(rowNum)].value)
             # Write the rowData list to the CSV file.
-            print(rowData)
-csvFile.close()
+            outputWriter.writerow(rowData)
+    csvFile.close()
